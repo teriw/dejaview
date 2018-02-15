@@ -72,10 +72,10 @@ class Assets extends React.Component<any, any> {
                             <nav className="level">
                                 <p className="level-item has-text-centered">
                                     <figure className="image">
-                                    <img src={asset.blobUri} />
+                                        <img src={asset.blobUri} />
                                     </figure>
                                 </p>
-                                <p className="level-item">
+                                <p className="">
                                     <article className="media">
                                         <div className="media-content">
                                             <div className="field">
@@ -83,15 +83,25 @@ class Assets extends React.Component<any, any> {
                                                     <textarea className="textarea" placeholder="Add a comment..."></textarea>
                                                 </p>
                                             </div>
-                                            <nav className="level">
-                                                <div className="level-left">
-                                                    <div className="level-item">
-                                                        <a className="button is-info">Submit</a>
-                                                    </div>
-                                                </div>
-                                            </nav>
+                                            
+                                            <a className="button is-info">Submit</a>
                                         </div>
                                     </article>
+                                    <div className="field is-grouped is-grouped-multiline margin-top-20">
+                                        <div className="control">
+                                            <div className="tags has-addons">
+                                            <span className="tag is-dark">date</span>
+                                            <span className="tag is-info">Hours ago</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="control">
+                                            <div className="tags has-addons">
+                                            <span className="tag is-dark">source</span>
+                                            <span className="tag is-success">{asset.source}</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </p>
                             </nav>
 
