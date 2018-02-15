@@ -37,35 +37,6 @@
             <a class="navbar-item" href="https://bulma.io/">
               Home
             </a>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link" href="/documentation/overview/start/">
-                Docs
-              </a>
-              <div class="navbar-dropdown is-boxed">
-                <a class="navbar-item" href="/documentation/overview/start/">
-                  Overview
-                </a>
-                <a class="navbar-item" href="https://bulma.io/documentation/modifiers/syntax/">
-                  Modifiers
-                </a>
-                <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
-                  Columns
-                </a>
-                <a class="navbar-item" href="https://bulma.io/documentation/layout/container/">
-                  Layout
-                </a>
-                <a class="navbar-item" href="https://bulma.io/documentation/form/general/">
-                  Form
-                </a>
-                <hr class="navbar-divider">
-                <a class="navbar-item" href="https://bulma.io/documentation/elements/box/">
-                  Elements
-                </a>
-                <a class="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
-                  Components
-                </a>
-              </div>
-            </div>
           </div>
 
           <div class="navbar-end">
@@ -101,11 +72,15 @@
 
 
 
+
+
+
+
       <section class="hero is-dark">
         <div class="hero-body">
           <div class="container">
             <h1 class="title">
-              Primary title
+              20 Haines Street, Curtin, ACT, 2605
             </h1>
             <h2 class="subtitle">
               Primary subtitle
@@ -114,29 +89,78 @@
         </div>
       </section>
 
-
-      <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-          <li>
-            <a href="#">DejaView</a>
-          </li>
-          <li>
-            <a href="#">Set Target</a>
-          </li>
-          <li class="is-active">
-            <a href="#" aria-current="page">Breadcrumb</a>
-          </li>
-        </ul>
+      <nav class="level">
+        <div class="level-item has-text-centered">
+        </div>
       </nav>
 
 
-      <h1 class="title">
-        DejaView
-      </h1>
-      <p class="subtitle">
-        Using
-        <strong>Bulma</strong>!
-      </p>
+
+      <nav class="level">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Images</p>
+            <p class="title">14</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Videos</p>
+            <p class="title">2</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Documents</p>
+            <p class="title">5</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Notes</p>
+            <p class="title">4</p>
+          </div>
+        </div>
+      </nav>
+
+
+
+
+      <hr />
+
+
+
+
+      <Assets />
+
+
+      <nav class="level">
+        <p class="level-item has-text-centered">
+          <figure class="image">
+            <img src="./images/640x480.png">
+          </figure>
+        </p>
+        <p class="level-item">
+          <article class="media">
+            <div class="media-content">
+              <div class="field">
+                <p class="control">
+                  <textarea class="textarea" placeholder="Add a comment..."></textarea>
+                </p>
+              </div>
+              <nav class="level">
+                <div class="level-left">
+                  <div class="level-item">
+                    <a class="button is-info">Submit</a>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </article>
+        </p>
+      </nav>
+
+      <hr />
 
 
       <div id="app"></div>
@@ -144,41 +168,21 @@
 
 
 
-
-
-      <nav class="level">
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Tweets</p>
-            <p class="title">3,456</p>
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Following</p>
-            <p class="title">123</p>
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Followers</p>
-            <p class="title">456K</p>
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Likes</p>
-            <p class="title">789</p>
-          </div>
-        </div>
-      </nav>
-
-
-
-
     </div>
   </section>
 
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          <strong>DejaView</strong> by
+          <a href="https://#">Info Div</a>. The source code is licensed
+          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+        </p>
+      </div>
+    </div>
+  </footer>
 
 
   <script src="dist/app.js"></script>

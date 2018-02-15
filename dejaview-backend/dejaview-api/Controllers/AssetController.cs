@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace dejaview_api.Controllers
 {
     [Route("api/[controller]")]
-    public class AssetController : Controller
+    public class AssetsController : Controller
     {
         // GET api/scrapjob
         // Returns a list of scrap jobs that need to be done.
@@ -20,16 +20,24 @@ namespace dejaview_api.Controllers
             };
         }
 
-        // GET api/values/5
+        // GET api/assets/20-Haines-Street-Curtin-ACT-2605
         [HttpGet("{id}")]
-        public IActionResult Get(string id)
+        public IEnumerable<Model.Asset> Get(string id)
         {
-            return new ObjectResult(
-                new {
-                    Id = id,
-                    Name = "108 Edgeworth Parade, Coombs, ACT, 2611"
+            return new List<Model.Asset>() {
+                new Model.Asset() {
+                    Id = "One",
+                    BlobUri = "file:///home/ben/Pictures/640x480.png",
+                    DateCreated = new DateTime(2018, 1, 28),
+                    Source = "allhomes.com.au"
+                },
+                new Model.Asset() {
+                    Id = "Two",
+                    BlobUri = "file:///home/ben/Pictures/640x480.png",
+                    DateCreated = new DateTime(2018, 1, 28),
+                    Source = "allhomes.com.au"
                 }
-            );
+            };
         }
 
         // POST api/values
