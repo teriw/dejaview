@@ -11,4 +11,4 @@ A react and bulma based web frontend.
 
 A mashup of .NET core and Python backend services.
 
-
+Go Team!

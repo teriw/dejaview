@@ -1,20 +1,40 @@
 from bs4 import BeautifulSoup
 import requests
 import re
+import scraperutils
 
 
-def printLinks(address):
-    r = requests.get("https://www.allhomes.com.au/ah/act/sale-residential/20-haines-street-curtin-canberra/1317491147911")
-
+def scrapeAddress(addressurl, addressId):
+    r = requests.get(addressurl)
     data = r.text
-    links = address
-
     soup = BeautifulSoup(data, "html.parser")
+    images = ""
+    counter = 0
+    #title = soup.title.string
+    for script in soup.findAll("script"):
+        if script.find("srcHighDef") != -1:
+            quotes = re.findall('"([^"]*)"', script.text)
+            for quotetext in quotes:
+                if quotetext.find("_hd.jpg") != -1:
+                    images = images + quotetext
+                    counter = counter+1
+                    filename = scraperutils.generateFileName(addressId, "allhomes", counter)
+                    scraperutils.downloadImage(addressId, quotetext, filename)
+                    #remove line below to get all images
+                    break
 
-    for link in soup.findAll('script'):
-        #print(link.get("href"))
-        #images = re.findall('"([^"]*)"', link)
-        #for image in images:
-            #image = image + image.text
-        links = links+link.text
-    return links
+    return str(counter) + " images returned at: " + addressurl
+
+def scrapeResearch(addressUrl, addressId):
+    r = requests.get(addressUrl)
+    data = r.text
+    soup = BeautifulSoup(data, "html.parser")
+    counter = 0
+    for image in soup.findAll("img"):
+        if image.get('alt') is not None:
+            if image.get('alt') == "Block Map":
+                counter = counter+1
+                filename = scraperutils.generateFileName(addressId, "allhomes_blockmap", counter)
+                scraperutils.downloadImage(addressId, "https:" + image.get('src'), filename)
+
+    return "Data scraped from Research"

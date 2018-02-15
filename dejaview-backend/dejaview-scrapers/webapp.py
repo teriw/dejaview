@@ -2,10 +2,10 @@ from bottle import route, run, template
 import scrape
 
 
-@route('/scrape/<address>/<geoloc>')
-def handler(address, geoloc):
-    links = scrape.scrapetheworld(address)
-    return template('<b>Scraping address {{address}} {{geoloc}} {{links}}</b>', address=address, geoloc=geoloc, links=links)
+@route('/scrape/<address>/<addressId>')
+def handler(address, addressId):
+    data = scrape.scrapetheworld(address, addressId)
+    return template('<b>Scraping address : <br> {{address}} <br>{{addressId}} <br> {{data}}</b>', address=address, addressId=addressId, data=data)
 
 
 run(host='localhost', port=8080)
