@@ -1,4 +1,6 @@
 import allhomes
 
+
 def scrapetheworld(address):
-    allhomes.printLinks(address)
+    data = allhomes.scrapeAddress(address)
+    return data;
