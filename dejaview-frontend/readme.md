@@ -4,3 +4,9 @@ To run this on the development web server (localhost:3000), do this:
 
 Then visit http://localhost:3000 in your favourite browser.
 
+
+
+Things to discuss with Adro and Kel:
+
+- Images need to be placed in the frontend 'images' directory - serving local files in a hosted page is not support by Chrome or Firefox anymore.
+- 
