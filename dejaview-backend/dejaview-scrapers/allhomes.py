@@ -4,22 +4,23 @@ import re
 import scraperutils
 
 
-def scrapeAddress(address):
-    r = requests.get("https://www.allhomes.com.au/ah/act/sale-residential/20-haines-street-curtin-canberra/1317491147911")
+def scrapeAddress(addressurl, addressId):
+    r = requests.get(addressurl)
     data = r.text
     soup = BeautifulSoup(data, "html.parser")
-    addressId = 1001
     images = ""
+    counter = 0
     #title = soup.title.string
     for script in soup.findAll("script"):
         if script.find("srcHighDef") != -1:
             quotes = re.findall('"([^"]*)"', script.text)
-            counter = 0
             for quotetext in quotes:
                 if quotetext.find("_hd.jpg") != -1:
                     images = images + quotetext
                     counter = counter+1
                     filename = "image" + str(counter) + ".jpg"
                     scraperutils.downloadImage(addressId, quotetext, filename)
+                    #remove line below to get all images
+                    break
 
-    return str(counter) + "images returned at: " + images
+    return str(counter) + " images returned at: " + addressurl
