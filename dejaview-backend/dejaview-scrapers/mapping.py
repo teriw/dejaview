@@ -1,127 +1,54 @@
-import googlemaps, requests, bingmaps
+import googlemaps, requests
 
-gmaps = googlemaps.Client(key='AIzaSyCPNuuW1GALn89xaVYxuLzuN3JELL0ClLk')
-geocode_result = gmaps.geocode('20 Haines Street, Curtin, ACT, 2605')
+#saveImage function, pass three strings, a URL, a fileName, and a description for the logging output.
+def saveImage(url,fileName,fileDescription):
+    url = url.replace(' ', '%20')
+    with open(fileName, 'wb') as handle:
+        response = requests.get(url, stream=True)
+        if not response.ok:
+            print (response)
 
-targetLatLong = str(str(geocode_result[0].get("geometry").get("location").get("lat")) + ',' + str(geocode_result[0].get("geometry").get("location").get("lng")))
-targetAddress = str(geocode_result[0].get("formatted_address"))
+        for block in response.iter_content(1024):
+            if not block:
+                break
 
-print('Collecting Google Maps imagery...')
+            handle.write(block)
+        print('  ' + fileDescription + ' Downloaded')
+    return
 
-#Get Google Local Road Map
-pic_url = str('https://maps.googleapis.com/maps/api/staticmap?center=' + targetLatLong + '&zoom=18&size=640x640&maptype=roadmap')
-with open('googleLocalRoadMap.jpg', 'wb') as handle:
-    response = requests.get(pic_url, stream=True)
-    if not response.ok:
-        print (response)
+def getImagery(address):
+    gmaps = googlemaps.Client(key='AIzaSyCPNuuW1GALn89xaVYxuLzuN3JELL0ClLk')
+    geocode_result = gmaps.geocode(address)
 
-    for block in response.iter_content(1024):
-        if not block:
-            break
-
-        handle.write(block)
-    print('  Target Street Map Downloaded')
-
-# Get Google Suburb Road Map
-pic_url = str('https://maps.googleapis.com/maps/api/staticmap?center=' + targetLatLong + '&zoom=15&size=640x640&markers=color:red%7C' + targetLatLong + '&maptype=roadmap')
-with open('googleSuburbRoadMap.jpg', 'wb') as handle:
-    response = requests.get(pic_url, stream=True)
-    if not response.ok:
-        print (response)
-
-    for block in response.iter_content(1024):
-        if not block:
-            break
-
-        handle.write(block)
-    print('  Suburb Street Map Downloaded')
-
-# Get Google Target Overhead Imagery
-pic_url = str('https://maps.googleapis.com/maps/api/staticmap?center=' + targetLatLong + '&zoom=20&size=640x640&maptype=satellite')
-with open('googleTargetSatellite.jpg', 'wb') as handle:
-    response = requests.get(pic_url, stream=True)
-    if not response.ok:
-        print (response)
-
-    for block in response.iter_content(1024):
-        if not block:
-            break
-
-        handle.write(block)
-    print('  Target Overhead Imagery Downloaded')
-
-# Get Google Area Imagery
-pic_url = str('https://maps.googleapis.com/maps/api/staticmap?center=' + targetLatLong + '&zoom=18&size=640x640&markers=color:red%7C' + targetLatLong + '&maptype=hybrid')
-with open('googleAreaImagery.jpg', 'wb') as handle:
-    response = requests.get(pic_url, stream=True)
-    if not response.ok:
-        print (response)
-
-    for block in response.iter_content(1024):
-        if not block:
-            break
-
-        handle.write(block)
-    print('  Area Imagery Downloaded')
-
-# Get Google Street View
-pic_url = str('https://maps.googleapis.com/maps/api/streetview?size=680x400&location=' + targetAddress + '&fov=110&pitch=0&key=AIzaSyCPNuuW1GALn89xaVYxuLzuN3JELL0ClLk')
-pic_url = pic_url.replace(' ', '%20')
-with open('googleStreetView.jpg', 'wb') as handle:
-    response = requests.get(pic_url, stream=True)
-    if not response.ok:
-        print (response)
-
-    for block in response.iter_content(1024):
-        if not block:
-            break
-
-        handle.write(block)
-    print('  Street View Downloaded')
+    targetLatLong = str(str(geocode_result[0].get("geometry").get("location").get("lat")) + ',' + str(geocode_result[0].get("geometry").get("location").get("lng")))
+    targetAddress = str(geocode_result[0].get("formatted_address"))
 
 
-print('Collecting Bing Maps Imagery...')
+    print('Collecting Google Maps imagery...')
+    #Get Google Local Road Map
+    saveImage(str('https://maps.googleapis.com/maps/api/staticmap?center=' + targetLatLong + '&zoom=18&size=640x640&maptype=roadmap'),'googleLocalRoadMap.jpg','Local Road Map')
 
-#Get Bing Local Road Map
-pic_url = str('https://dev.virtualearth.net/REST/V1/Imagery/Map/CanvasLight/' + targetLatLong + '/17?mapSize=680,680&pushpin=' + targetLatLong + ';0&key=AluRHNFmdS409Z_IbVrx1_qZEQNEgGJMqce4A1UP1DC0Q0lpQz04g3BcZmCGYkbC')
-with open('bingLocalRoadMap.jpg', 'wb') as handle:
-    response = requests.get(pic_url, stream=True)
-    if not response.ok:
-        print (response)
+    # Get Google Suburb Road Map
+    saveImage(str('https://maps.googleapis.com/maps/api/staticmap?center=' + targetLatLong + '&zoom=15&size=640x640&markers=color:red%7C' + targetLatLong + '&maptype=roadmap'),'googleSuburbRoadMap.jpg','Suburb Street Map')
 
-    for block in response.iter_content(1024):
-        if not block:
-            break
+    # Get Google Target Overhead Imagery
+    saveImage(str('https://maps.googleapis.com/maps/api/staticmap?center=' + targetLatLong + '&zoom=20&size=640x640&maptype=satellite'),'googleTargetSatellite.jpg','Target Overhead Imagery')
 
-        handle.write(block)
-    print('  Target Street Map Downloaded')
+    # Get Google Area Imagery
+    saveImage(str('https://maps.googleapis.com/maps/api/staticmap?center=' + targetLatLong + '&zoom=18&size=640x640&markers=color:red%7C' + targetLatLong + '&maptype=hybrid'),'googleAreaImagery.jpg','Area Imagery')
+
+    # Get Google Street View
+    saveImage(str('https://maps.googleapis.com/maps/api/streetview?size=680x400&location=' + targetAddress + '&fov=110&pitch=0&key=AIzaSyCPNuuW1GALn89xaVYxuLzuN3JELL0ClLk'),'googleStreetView.jpg','Street View')
 
 
-#Get Bing Target Overhead Imagery
-pic_url = str('https://dev.virtualearth.net/REST/V1/Imagery/Map/AerialWithLabels/' + targetLatLong + '/20?mapSize=680,680&key=AluRHNFmdS409Z_IbVrx1_qZEQNEgGJMqce4A1UP1DC0Q0lpQz04g3BcZmCGYkbC')
-with open('bingTargetSatellite.jpg', 'wb') as handle:
-    response = requests.get(pic_url, stream=True)
-    if not response.ok:
-        print (response)
+    print('Collecting Bing Maps Imagery...')
+    #Get Bing Local Road Map
+    saveImage(str('https://dev.virtualearth.net/REST/V1/Imagery/Map/CanvasLight/' + targetLatLong + '/17?mapSize=680,680&pushpin=' + targetLatLong + ';0&key=AluRHNFmdS409Z_IbVrx1_qZEQNEgGJMqce4A1UP1DC0Q0lpQz04g3BcZmCGYkbC'),'bingLocalRoadMap.jpg','Target Street Map')
 
-    for block in response.iter_content(1024):
-        if not block:
-            break
+    #Get Bing Target Overhead Imagery
+    saveImage(str('https://dev.virtualearth.net/REST/V1/Imagery/Map/AerialWithLabels/' + targetLatLong + '/20?mapSize=680,680&key=AluRHNFmdS409Z_IbVrx1_qZEQNEgGJMqce4A1UP1DC0Q0lpQz04g3BcZmCGYkbC'),'bingTargetSatellite.jpg','Target Overhead Imagery')
 
-        handle.write(block)
-    print('  Target Overhead Imagery Downloaded')
+    #Get Bing Area Imagery
+    saveImage(str('https://dev.virtualearth.net/REST/V1/Imagery/Map/AerialWithLabels/' + targetLatLong + '/18?mapSize=680,680&pushpin=' + targetLatLong + ';89&key=AluRHNFmdS409Z_IbVrx1_qZEQNEgGJMqce4A1UP1DC0Q0lpQz04g3BcZmCGYkbC'),'bingAreaImagery.jpg','Area Imagery')
 
-#Get Bing Area Imagery
-pic_url = str('https://dev.virtualearth.net/REST/V1/Imagery/Map/AerialWithLabels/' + targetLatLong + '/18?mapSize=680,680&pushpin=' + targetLatLong + ';89&key=AluRHNFmdS409Z_IbVrx1_qZEQNEgGJMqce4A1UP1DC0Q0lpQz04g3BcZmCGYkbC')
-with open('bingAreaImagery.jpg', 'wb') as handle:
-    response = requests.get(pic_url, stream=True)
-    if not response.ok:
-        print (response)
-
-    for block in response.iter_content(1024):
-        if not block:
-            break
-
-        handle.write(block)
-    print('  Area Imagery Downloaded')
-
+    return
