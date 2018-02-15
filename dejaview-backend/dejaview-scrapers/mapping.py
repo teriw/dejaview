@@ -83,7 +83,7 @@ with open('googleStreetView.jpg', 'wb') as handle:
 print('Collecting Bing Maps Imagery...')
 
 #Get Bing Local Road Map
-pic_url = str('https://dev.virtualearth.net/REST/V1/Imagery/Map/AerialWithLabels/' + targetLatLong + '/15?mapSize=680,680&key=AluRHNFmdS409Z_IbVrx1_qZEQNEgGJMqce4A1UP1DC0Q0lpQz04g3BcZmCGYkbC')
+pic_url = str('https://dev.virtualearth.net/REST/V1/Imagery/Map/CanvasLight/' + targetLatLong + '/17?mapSize=680,680&pushpin=' + targetLatLong + ';0&key=AluRHNFmdS409Z_IbVrx1_qZEQNEgGJMqce4A1UP1DC0Q0lpQz04g3BcZmCGYkbC')
 with open('bingLocalRoadMap.jpg', 'wb') as handle:
     response = requests.get(pic_url, stream=True)
     if not response.ok:
@@ -95,6 +95,7 @@ with open('bingLocalRoadMap.jpg', 'wb') as handle:
 
         handle.write(block)
     print('  Target Street Map Downloaded')
+
 
 #Get Bing Target Overhead Imagery
 pic_url = str('https://dev.virtualearth.net/REST/V1/Imagery/Map/AerialWithLabels/' + targetLatLong + '/20?mapSize=680,680&key=AluRHNFmdS409Z_IbVrx1_qZEQNEgGJMqce4A1UP1DC0Q0lpQz04g3BcZmCGYkbC')
@@ -109,3 +110,18 @@ with open('bingTargetSatellite.jpg', 'wb') as handle:
 
         handle.write(block)
     print('  Target Overhead Imagery Downloaded')
+
+#Get Bing Area Imagery
+pic_url = str('https://dev.virtualearth.net/REST/V1/Imagery/Map/AerialWithLabels/' + targetLatLong + '/18?mapSize=680,680&pushpin=' + targetLatLong + ';89&key=AluRHNFmdS409Z_IbVrx1_qZEQNEgGJMqce4A1UP1DC0Q0lpQz04g3BcZmCGYkbC')
+with open('bingAreaImagery.jpg', 'wb') as handle:
+    response = requests.get(pic_url, stream=True)
+    if not response.ok:
+        print response
+
+    for block in response.iter_content(1024):
+        if not block:
+            break
+
+        handle.write(block)
+    print('  Area Imagery Downloaded')
+
