@@ -4,7 +4,7 @@ import scrape
 
 @route('/scrape/<address>/<addressId>')
 def handler(address, addressId):
-    data = scrape.scrapetheworld(address, addressId)
+    data = scrape.scrapetheworld(address)
     return template('<b>Scraping address : <br> {{address}} <br>{{addressId}} <br> {{data}}</b>', address=address, addressId=addressId, data=data)
 
 
