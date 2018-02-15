@@ -27,14 +27,20 @@ namespace dejaview_api.Controllers
             return new List<Model.Asset>() {
                 new Model.Asset() {
                     Id = "One",
-                    BlobUri = "file:///home/ben/Pictures/640x480.png",
+                    BlobUri = "./images/20-haines-st-curtin-act-2605/025ee00bf350b530827d0b3a93ba1f97_hd.jpg",
                     DateCreated = new DateTime(2018, 1, 28),
                     Source = "allhomes.com.au"
                 },
                 new Model.Asset() {
                     Id = "Two",
-                    BlobUri = "file:///home/ben/Pictures/640x480.png",
-                    DateCreated = new DateTime(2018, 1, 28),
+                    BlobUri = "./images/20-haines-st-curtin-act-2605/4bdab746fdcb055f00c49e8e496fc596_hd.jpg",
+                    DateCreated = new DateTime(2018, 1, 30),
+                    Source = "allhomes.com.au"
+                },
+                new Model.Asset() {
+                    Id = "Three",
+                    BlobUri = "./images/640x480.png",
+                    DateCreated = new DateTime(2018, 1, 30),
                     Source = "allhomes.com.au"
                 }
             };
