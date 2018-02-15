@@ -13,7 +13,7 @@ pic_url = str('https://maps.googleapis.com/maps/api/staticmap?center=' + targetL
 with open('googleLocalRoadMap.jpg', 'wb') as handle:
     response = requests.get(pic_url, stream=True)
     if not response.ok:
-        print response
+        print (response)
 
     for block in response.iter_content(1024):
         if not block:
@@ -27,7 +27,7 @@ pic_url = str('https://maps.googleapis.com/maps/api/staticmap?center=' + targetL
 with open('googleSuburbRoadMap.jpg', 'wb') as handle:
     response = requests.get(pic_url, stream=True)
     if not response.ok:
-        print response
+        print (response)
 
     for block in response.iter_content(1024):
         if not block:
@@ -41,7 +41,7 @@ pic_url = str('https://maps.googleapis.com/maps/api/staticmap?center=' + targetL
 with open('googleTargetSatellite.jpg', 'wb') as handle:
     response = requests.get(pic_url, stream=True)
     if not response.ok:
-        print response
+        print (response)
 
     for block in response.iter_content(1024):
         if not block:
@@ -55,7 +55,7 @@ pic_url = str('https://maps.googleapis.com/maps/api/staticmap?center=' + targetL
 with open('googleAreaImagery.jpg', 'wb') as handle:
     response = requests.get(pic_url, stream=True)
     if not response.ok:
-        print response
+        print (response)
 
     for block in response.iter_content(1024):
         if not block:
@@ -70,7 +70,7 @@ pic_url = pic_url.replace(' ', '%20')
 with open('googleStreetView.jpg', 'wb') as handle:
     response = requests.get(pic_url, stream=True)
     if not response.ok:
-        print response
+        print (response)
 
     for block in response.iter_content(1024):
         if not block:
@@ -87,7 +87,7 @@ pic_url = str('https://dev.virtualearth.net/REST/V1/Imagery/Map/CanvasLight/' + 
 with open('bingLocalRoadMap.jpg', 'wb') as handle:
     response = requests.get(pic_url, stream=True)
     if not response.ok:
-        print response
+        print (response)
 
     for block in response.iter_content(1024):
         if not block:
@@ -102,7 +102,7 @@ pic_url = str('https://dev.virtualearth.net/REST/V1/Imagery/Map/AerialWithLabels
 with open('bingTargetSatellite.jpg', 'wb') as handle:
     response = requests.get(pic_url, stream=True)
     if not response.ok:
-        print response
+        print (response)
 
     for block in response.iter_content(1024):
         if not block:
@@ -116,7 +116,7 @@ pic_url = str('https://dev.virtualearth.net/REST/V1/Imagery/Map/AerialWithLabels
 with open('bingAreaImagery.jpg', 'wb') as handle:
     response = requests.get(pic_url, stream=True)
     if not response.ok:
-        print response
+        print (response)
 
     for block in response.iter_content(1024):
         if not block:
