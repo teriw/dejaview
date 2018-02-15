@@ -23,7 +23,6 @@ def getImagery(address):
     targetLatLong = str(str(geocode_result[0].get("geometry").get("location").get("lat")) + ',' + str(geocode_result[0].get("geometry").get("location").get("lng")))
     targetAddress = str(geocode_result[0].get("formatted_address"))
 
-
     print('Collecting Google Maps imagery...')
     #Get Google Local Road Map
     saveImage(str('https://maps.googleapis.com/maps/api/staticmap?center=' + targetLatLong + '&zoom=18&size=640x640&maptype=roadmap'),'googleLocalRoadMap.jpg','Local Road Map')
