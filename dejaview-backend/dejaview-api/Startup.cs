@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Cors;
 
 namespace dejaview_api
 {
@@ -24,7 +25,16 @@ namespace dejaview_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(); //Enable Cross-Origin Requests (CORS)
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("*"));
+            });
+
             services.AddMvc();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +44,8 @@ namespace dejaview_api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("AllowSpecificOrigin");
 
             app.UseMvc();
         }

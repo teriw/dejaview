@@ -9,6 +9,7 @@ const PI = 3.141593;
 let nums: number[] = [2, 3, 5, 7, 8, 9, 10, 11, 12];
 let fives: number[] = [];
 
+
 nums.forEach((v, i) => {
     if (v % 5 === 0) {
         fives.push(v);
@@ -74,7 +75,76 @@ class Welcome extends React.Component<any, any> {
         super(props);
     }
 
-    public render() {
-        return <h3>Hello, {this.props.name}</h3>;
+    
+
+
+    componentDidMount() {
+        var that = this;
+
+        fetch('http://localhost:5000/api/scrapjob')
+        .then(results => {
+            // return results.json();
+            return results.json();
+        })
+        .then(data => {
+            let scrapjobs = data.map((scrapjob: any) => {
+
+                console.log("dumping scrapjob", scrapjob);
+
+                return(
+                    <div>{scrapjob}</div>
+                )
+            })
+
+            console.log("dumping scrapjobs", scrapjobs);
+
+            that.setState({scrapjobs: scrapjobs});
+
+            console.log("component did mount", that.state.scrapjobs);
+        })
+
+        
     }
+
+
+    public render() {
+
+        if (this.state == null) {
+            return (
+                <p>state is null</p>
+            )
+        }
+
+        //return <h3>Hello, {this.props.name}</h3>;
+
+        console.log("rendering!", this.state);
+        // console.log("rendering!", this.state.scrapjobs);
+
+        // const personLoc = Object.keys(this.state.person.loc).map((content, idx) => {
+        //     const items = this.state.person.loc[content].map((item, i) => (
+        //         <p key={i}>{item.text}</p>
+        //     ))
+        
+        //     return <div key={idx}>{items}</div>
+        // })
+
+        // Object.keys(this.state.scrapjobs).map((content, idx) => {
+        //     console.log("helloo?", content)
+
+        // })
+
+        // const items = this.state.
+
+        // const items = this.state.scrapjobs.map((item: any, i: any) => (
+        //     console.log("HAH", item)
+        // ))
+
+        return (
+            <div className="container">
+                {this.state.scrapjobs}
+            </div>
+        )
+    }
+    
 }
+

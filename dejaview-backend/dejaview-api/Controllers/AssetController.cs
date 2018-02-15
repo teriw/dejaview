@@ -25,9 +25,9 @@ namespace dejaview_api.Controllers
         public IActionResult Get(string id)
         {
             return new ObjectResult(
-                new {
-                    Id = id,
-                    Name = "108 Edgeworth Parade, Coombs, ACT, 2611"
+                new Model.Asset() {
+                    BlobUri = "file:///home/ben/Pictures/640x480.png",
+                    DateCreated = new DateTime(2018, 1, 28)
                 }
             );
         }
