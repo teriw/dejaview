@@ -4,7 +4,7 @@ import scrape
 
 @route('/scrape/<address>/<geoloc>')
 def handler(address, geoloc):
-    links = scrape.printLinks(address)
+    links = scrape.scrapetheworld(address)
     return template('<b>Scraping address {{address}} {{geoloc}} {{links}}</b>', address=address, geoloc=geoloc, links=links)
 
 

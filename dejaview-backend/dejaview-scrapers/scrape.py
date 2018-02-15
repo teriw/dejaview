@@ -1,4 +1,4 @@
 import allhomes
 
-def printLinks(address):
+def scrapetheworld(address):
     allhomes.printLinks(address)
