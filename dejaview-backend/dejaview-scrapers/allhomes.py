@@ -18,9 +18,23 @@ def scrapeAddress(addressurl, addressId):
                 if quotetext.find("_hd.jpg") != -1:
                     images = images + quotetext
                     counter = counter+1
-                    filename = "image" + str(counter) + ".jpg"
+                    filename = scraperutils.generateFileName(addressId, "allhomes", counter)
                     scraperutils.downloadImage(addressId, quotetext, filename)
                     #remove line below to get all images
                     break
 
     return str(counter) + " images returned at: " + addressurl
+
+def scrapeResearch(addressUrl, addressId):
+    r = requests.get(addressUrl)
+    data = r.text
+    soup = BeautifulSoup(data, "html.parser")
+    counter = 0
+    for image in soup.findAll("img"):
+        if image.get('alt') is not None:
+            if image.get('alt') == "Block Map":
+                counter = counter+1
+                filename = scraperutils.generateFileName(addressId, "allhomes_blockmap", counter)
+                scraperutils.downloadImage(addressId, "https:" + image.get('src'), filename)
+
+    return "Data scraped from Research"
