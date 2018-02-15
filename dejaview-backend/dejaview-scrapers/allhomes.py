@@ -5,10 +5,11 @@ import scraperutils
 
 
 def scrapeAddress(addressurl, addressId):
+    SOURCE = "AllHomes"
     r = requests.get(addressurl)
     data = r.text
     soup = BeautifulSoup(data, "html.parser")
-    images = ""
+    #images = ""
     counter = 0
     #title = soup.title.string
     for script in soup.findAll("script"):
@@ -16,12 +17,12 @@ def scrapeAddress(addressurl, addressId):
             quotes = re.findall('"([^"]*)"', script.text)
             for quotetext in quotes:
                 if quotetext.find("_hd.jpg") != -1:
-                    images = images + quotetext
+                    #images = images + quotetext
                     counter = counter+1
-                    filename = scraperutils.generateFileName(addressId, "allhomes", counter)
-                    scraperutils.downloadImage(addressId, quotetext, filename)
+                    #filename = scraperutils.generateFileName(addressId, SOURCE, quotetext)
+                    scraperutils.downloadImage(addressId, SOURCE,  quotetext, scraperutils.urlFileName(quotetext))
                     #remove line below to get all images
-                    break
+                    #break
 
     return str(counter) + " images returned at: " + addressurl
 
