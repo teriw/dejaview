@@ -7,7 +7,8 @@ module.exports = {
 
   // entry point of our application, within the `src` directory (which we add to resolve.modules below):
   entry: [
-    'index.tsx'
+    'index.tsx',
+    'AssetComponent.tsx'
   ],
 
   // configure the output directory and publicPath for the devServer
