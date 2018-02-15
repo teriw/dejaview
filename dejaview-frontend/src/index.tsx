@@ -32,6 +32,18 @@ class Shape {
 
 
 
+function getParameterByName(name: string) {
+    var url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+
+
 class Assets extends React.Component<any, any> {
 
     timerID: any;
@@ -56,8 +68,11 @@ class Assets extends React.Component<any, any> {
 
     tick() {
         var that = this;
+
+        var addressParam = getParameterByName('address');
+        console.log("address info", addressParam)
         
-        fetch('http://localhost:5000/api/assets/20-haines-st-curtin-act-2605')
+        fetch('http://localhost:5000/api/assets/20-haines-street-curtin-canberra')
             .then(results => {
                 return results.json();
             })
@@ -88,12 +103,6 @@ class Assets extends React.Component<any, any> {
                                         </div>
                                     </article>
                                     <div className="field is-grouped is-grouped-multiline margin-top-20">
-                                        <div className="control">
-                                            <div className="tags has-addons">
-                                            <span className="tag is-dark">date</span>
-                                            <span className="tag is-info">Hours ago</span>
-                                            </div>
-                                        </div>
 
                                         <div className="control">
                                             <div className="tags has-addons">

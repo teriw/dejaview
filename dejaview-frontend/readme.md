@@ -4,7 +4,7 @@ To run this on the development web server (localhost:3000), do this:
 
 Then visit http://localhost:3000 in your favourite browser.
 
-
+http://localhost:3000/address.html?address=20-haines-street-curtin-canberra
 
 Things to discuss with Adro and Kel:
 

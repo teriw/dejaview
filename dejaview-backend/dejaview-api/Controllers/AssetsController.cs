@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,39 @@ namespace dejaview_api.Controllers
         [HttpGet("{id}")]
         public IEnumerable<Model.Asset> Get(string id)
         {
+
+            Console.WriteLine("Running Get: " + id);
+
+
+            var assetList = new List<Model.Asset>();
+
+            var dirs = Directory.GetDirectories("/home/ben/git/dejaview/dejaview-frontend/images/" + id);
+
+            foreach (var dir in dirs)
+            {
+                var source = Path.GetFileName(dir);
+
+                foreach (var file in Directory.GetFiles(dir))
+                {
+                    
+
+                    var asset = new Model.Asset() {
+                        Id = "foo",
+                        BlobUri = "./images/" + id + "/" + source + "/" + Path.GetFileName(file),
+                        DateCreated = new DateTime(2018, 1, 28),
+                        Source = source
+                    };
+
+                    Console.WriteLine("BlobUri : " + asset.BlobUri);
+
+                    assetList.Add(asset);
+                }
+            }
+
+
+            return assetList;
+
+
             return new List<Model.Asset>() {
                 new Model.Asset() {
                     Id = "One",
