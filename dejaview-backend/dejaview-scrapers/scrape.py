@@ -1,6 +1,7 @@
 import allhomes
 import googlesearch
 import re
+import mapping
 
 def scrapetheworld(address):
     #get the url for allhomes from a google search rather than using the allhomes search
@@ -14,6 +15,8 @@ def scrapetheworld(address):
         #researchUrl = googlesearch.allHomesResearchUrl(address)
         data = data + "<br>"
         #data = data + allhomes.scrapeResearch(researchUrl, addressId)
+
+        mapping.getImagery(addressId)
     else:
         data = "Address was unable to be found on allhomes"
     return data

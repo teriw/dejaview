@@ -3,11 +3,11 @@ import os
 import datetime
 import re
 
-def downloadImage(addressId, fileSource, fileurl, filename):
+def downloadImage(addressId, fileSource, fileUrl, fileName):
     #myPath = os.path.join(
     #    "C:" + os.sep + "3.Development" + os.sep + "Python" + os.sep + "dejaview" + os.sep + "images")
-    fullfilename = os.path.join(rootAddressPath(addressId, fileSource), filename)
-    urllib.request.urlretrieve(fileurl, fullfilename)
+    #fullfilename = os.path.join(rootAddressPath(addressId, fileSource), filename)
+    urllib.request.urlretrieve(fileUrl, fullFileName(addressId,fileSource,fileName))
 
 def generateFileName(addressId, filesource, counter):
     #currentDateTime = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
@@ -16,6 +16,9 @@ def generateFileName(addressId, filesource, counter):
 def urlFileName(url):
     parts = re.split('/', url)
     return parts[len(parts) - 1]
+
+def fullFileName(addressId,fileSource,fileName):
+    return os.path.join(rootAddressPath(addressId, fileSource), fileName)
 
 #[Git Repository Path]/Data
 def dataRoot():
