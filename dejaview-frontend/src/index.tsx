@@ -43,6 +43,49 @@ function getParameterByName(name: string) {
 }
 
 
+function toTitleCase(str: string)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
+
+
+class Heading extends React.Component<any, any> {
+
+    public render() {
+
+        var addressParam = getParameterByName('address');
+
+        if (addressParam != null) {
+            addressParam = addressParam.replace(/-/g, " ");
+            addressParam = toTitleCase(addressParam);
+        }
+
+        return (
+            <section className="hero is-dark">
+                <div className="hero-body">
+                <div className="container">
+                    <h1 className="title">
+                    {addressParam}
+                    </h1>
+                    <h2 className="subtitle">
+                    Residential property
+                    </h2>
+                </div>
+                </div>
+            </section>
+        )
+    }
+}
+
+ReactDOM.render(
+    <Heading />,
+    document.getElementById('heading')
+);
+
+
+
+
 
 class Assets extends React.Component<any, any> {
 
@@ -72,7 +115,7 @@ class Assets extends React.Component<any, any> {
         var addressParam = getParameterByName('address');
         console.log("address info", addressParam)
         
-        fetch('http://localhost:5000/api/assets/20-haines-street-curtin-canberra')
+        fetch('http://localhost:5000/api/assets/' + addressParam)
             .then(results => {
                 return results.json();
             })
@@ -83,7 +126,6 @@ class Assets extends React.Component<any, any> {
 
                     return (
                         <div>
-                            <h1>{asset.id}</h1>
                             <nav className="level">
                                 <p className="level-item has-text-centered">
                                     <figure className="image">

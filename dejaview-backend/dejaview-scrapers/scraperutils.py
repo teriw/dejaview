@@ -23,9 +23,10 @@ def fullFileName(addressId,fileSource,fileName):
 #[Git Repository Path]/Data
 def dataRoot():
     return os.path.normpath(os.path.abspath(os.path.curdir) + os.sep + os.pardir + os.sep + os.pardir + os.sep + "Data")
+    # return "/home/ben/git/dejaview/dejaview-frontend/images/";
 
 #[dataRoot]/ID/FileSource : Makes dirs if required
 def rootAddressPath(addressId, fileSource):
     addressPath = os.path.join(dataRoot(),addressId,fileSource)
-    os.makedirs(addressPath,0x755,True)
+    os.makedirs(addressPath,0o777,True)
     return addressPath
