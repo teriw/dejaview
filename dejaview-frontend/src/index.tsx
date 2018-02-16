@@ -98,7 +98,7 @@ class Assets extends React.Component<any, any> {
     componentDidMount() {
         this.timerID = setInterval(
             () => this.tick(),
-            5000
+            2000
           );
     }
 
