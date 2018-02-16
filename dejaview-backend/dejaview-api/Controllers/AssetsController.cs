@@ -25,13 +25,17 @@ namespace dejaview_api.Controllers
         [HttpGet("{id}")]
         public IEnumerable<Model.Asset> Get(string id)
         {
-
-            Console.WriteLine("Running Get: " + id);
-
-
             var assetList = new List<Model.Asset>();
 
-            var dirs = Directory.GetDirectories("/home/ben/git/dejaview/dejaview-frontend/images/" + id);
+            Console.WriteLine("Running Get: " + id);
+            var rootDirectoryName = "/home/ben/git/dejaview/dejaview-frontend/images/" + id;
+
+            if (Directory.Exists(rootDirectoryName) == false) 
+            {
+                return assetList;
+            }
+
+            var dirs = Directory.GetDirectories(rootDirectoryName);
 
             foreach (var dir in dirs)
             {
